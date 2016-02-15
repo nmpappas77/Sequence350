@@ -19,7 +19,6 @@
 
 	public void Reset(){
 			BoardDeck = new String[8][8];
-			player1 = true;
 			Deck = new String[16];
 			Player1Hand = new String [5];
 			Player2Hand = new String [5];
