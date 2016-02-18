@@ -184,7 +184,7 @@ import java.util.Random;
 		for (int col = 0; col < 8; col++){
 			counter++;
 			for (int row = 1; row < 8; row++){
-				if (board[row][col] != 'Space' && board[row][col] == board[row-1][col])
+				if (board[row][col] != ' ' && board[row][col] == board[row-1][col])
 `					counter++;
 				else counter = 1;
 				
@@ -198,7 +198,7 @@ import java.util.Random;
             int count = 0;
             for (int row = 1; row < 8; ++row) {
                 if (col + row >= 8) break;
-                if (board[row][colu+row] != ' ' &&
+                if (board[row][col+row] != ' ' &&
                     board[row-1][col + row - 1] == board[row][col+row])
                     ++count;
                 else
