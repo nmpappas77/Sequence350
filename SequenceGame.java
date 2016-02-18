@@ -219,7 +219,7 @@ import java.util.Random;
                 else
                     count = 1;
                 if (count >= 4) 
-                	return board[row + col][col];
+                	return true;
             }
         }
         
@@ -249,7 +249,7 @@ import java.util.Random;
                 else
                     count = 1;
                 if (count >= 4) 
-                	return board[col - row][col];
+                	return true;
             }
         }
 		
