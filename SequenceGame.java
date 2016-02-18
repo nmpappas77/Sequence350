@@ -170,7 +170,7 @@ import java.util.Random;
 		for (int row = 0; row < 8; row++){
 			counter++;
 			for(int col = 1; col < 8; col++){
-				if (board[row][col] != ' ' && board [row][col] == board[row][col-1])
+				if (board[row][col] != 'Space' && board [row][col] == board[row][col-1])
 					counter++;
 			
 		else 
@@ -180,13 +180,13 @@ import java.util.Random;
 		}
 	}
 		//check horizontal win
-		int counter2 = 0;
+		
 		for (int col = 0; col < 8; col++){
-			counter2++;
+			counter++;
 			for (int row = 1; row < 8; row++){
 				if (board[row][col] != 'Space' && board[row][col] == board[row-1][col])
-`					counter2++;
-				else counter2 = 1;
+`					counter++;
+				else counter = 1;
 				
 				if (counter >= 4)
 					return true;
@@ -203,7 +203,8 @@ import java.util.Random;
                     ++count;
                 else
                     count = 1;
-                if (count >= 4) return board[row][col+row];
+                if (count >= 4) 
+                	return true;
             }
         }
         
@@ -217,7 +218,8 @@ import java.util.Random;
                     ++count;
                 else
                     count = 1;
-                if (count >= 4) return board[row + col][col];
+                if (count >= 4) 
+                	return board[row + col][col];
             }
         }
         
@@ -231,7 +233,8 @@ import java.util.Random;
                     ++count;
                 else
                     count = 1;
-                if (count >= 4) return board[row][col-row];
+                if (count >= 4) 
+                	return true;
             }
         }
 
@@ -245,7 +248,8 @@ import java.util.Random;
                     ++count;
                 else
                     count = 1;
-                if (count >= 4) return board[col - row][col];
+                if (count >= 4) 
+                	return board[col - row][col];
             }
         }
 		
