@@ -254,11 +254,11 @@ public class SequenceGame {
 		
 		int col;
 		//check for diagonal from top-left to bottom-right
-        for (int column = 0; column < 8; ++column) {
+        for (int col1 = 0; col1 < 8; ++col1) {
             int count = 0;
             for (int row1 = 1; row1 < 8; ++row1) {
-                if (col + row1 >= 8) break;
-                if (board[row1-1][col + row1 - 1] == board[row1][col+row1])
+                if (col1 + row1 >= 8) break;
+                if (board[row1-1][col1 + row1 - 1] == board[row1][col1+row1])
                     ++count;
        
                 if (count >= 4) 
@@ -280,11 +280,11 @@ public class SequenceGame {
         }
         
         //check diagonal top-right to bottom-left
-        for (int column = 0; col < 8; ++col) {
+        for (int col1 = 0; col1 < 8; ++col1) {
             int count = 0;
-            for (int row = 1; row < 8; ++row) {
-                if (col - row < 0) break;
-                if (board[row - 1][col - row + 1] == board[row][col-row])
+            for (int row1 = 1; row1 < 8; ++row1) {
+                if (col1 - row1 < 0) break;
+                if (board[row1 - 1][col1 - row1 + 1] == board[row1][col1-row1])
                     ++count;
                 else
                     count = 1;
@@ -294,8 +294,9 @@ public class SequenceGame {
             }	
         }
 		
-		return false;
+		
 		}
+		return false;
 	}
 
 	/*
