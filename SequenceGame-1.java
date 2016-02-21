@@ -244,39 +244,36 @@ public class SequenceGame {
 		
 		for (int col = 0; col < 8; col++){
 			counter++;
-			for (int row = 1; row < 8; row++){
-				if (board[row][col] == board[row-1][col])
+			for (int row1 = 1; row1 < 8; row1++){
+				if (board[row1][col] == board[row1-1][col])
 					counter++;
-				else counter = 1;
-				
 				if (counter >= 4)
 					return true;
 			}
 		}
 		
+		int col;
 		//check for diagonal from top-left to bottom-right
         for (int column = 0; column < 8; ++column) {
             int count = 0;
-            for (int row = 1; row < 8; ++row) {
-                if (col + row >= 8) break;
-                if (board[row-1][col + row - 1] == board[row][col+row])
+            for (int row1 = 1; row1 < 8; ++row1) {
+                if (col + row1 >= 8) break;
+                if (board[row1-1][col + row1 - 1] == board[row1][col+row1])
                     ++count;
-                else
-                    count = 1;
+       
                 if (count >= 4) 
                 	return true;
             }
         }
         
         // There are diagonals, that starts on left of each row, let's check them
-        for (int row = 0; row < 8; ++row) {
+        for (int row1 = 0; row1 < 8; ++row1) {
             int count = 0;
-            for (int col = 1; col < 8; ++col) {
-                if (col + row >= 7) break;
-                if (board[row+col - 1][col - 1] == board[row + col][col])
+            for (int col1 = 1; col1 < 8; ++col1) {
+                if (col1 + row1 >= 7) break;
+                if (board[row1+col1 - 1][col1 - 1] == board[row1 + col1][col1])
                     ++count;
-                else
-                    count = 1;
+             
                 if (count >= 4) 
                 	return true;
             }
@@ -325,3 +322,7 @@ public class SequenceGame {
 			
 		}
 	}
+
+	
+
+
