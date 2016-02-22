@@ -25,6 +25,9 @@ public class SequenceGame {
 	 
 	 /** Player two's hand */
 	 private String[] playerTwo;
+	 
+	 /** Check for valid button press */
+	 private boolean valid;
 	
 	 
 	 /**Constructor to create a game */
@@ -53,6 +56,8 @@ public class SequenceGame {
 		//System.out.println(board[4][5].getCardSpace());
 		
 		counter = 0;
+		
+		valid = false;
 	}
 	
 	public String[] getPlayerOne(){
@@ -67,7 +72,13 @@ public class SequenceGame {
 		return board;
 	}
 	
+	public Boolean getValid(){
+		return valid;
+	}
 	
+	public void setValid(Boolean b){
+		valid = false;
+	}
 	
 	/** Creates the array of cards in the deck */
 	public String[] createDeck(String[] cards){
@@ -99,14 +110,14 @@ public class SequenceGame {
 	
 	/** makes every card have a count of 4 in the array */
 	public int[] fillDeck(int[] counts){
-		int[] counter;
+		int[] counting;
 		
-		counter = counts;
+		counting = counts;
 		
 		for (int i = 0; i < counts.length; i++)
-			counter[i] = 4;
+			counting[i] = 4;
 		
-		return counter;
+		return counting;
 	}
 	
 	public String[] giveHand(String[] playerHand){
@@ -152,8 +163,7 @@ public class SequenceGame {
 		Random rand = new Random();
 		
 		String temp;
-		
-		int name;
+	
 		int x;
 		int y;
 		
@@ -217,37 +227,41 @@ public class SequenceGame {
 	}
 	
 	public void Turn(){
-		int x = 0;
-		
-		while (x == 0){
-			if (counter % 2 == 0){
+			if(counter % 2 == 0){
 				System.out.println("Player 1 Move");
-			}if (counter % 2 == 1){
-				System.out.println("Player 2 Move");
+				counter++;
 			}
-			counter++;
-		}
+			else{ 
+				System.out.println("Player 2 Move");
+				counter++;
+			}
+			
 	}
 	
 	public void select(int row, int col){
+		
+		
+		
 		if(counter % 2 == 0)
 			for(int i = 0; i < 5; i++)
-				if(board[row][col].toString() == playerOne[i].toString()){
+				if(board[row][col].getCardSpace() == playerOne[i].toString()){
 					board[row][col] = new Space("Player One");
 					playerOne[i] = null;
 					replaceCard(playerOne);
-					counter++;
-					
+					Turn();
+					valid = true;
 				}
 		
 		if(counter % 2 == 1)
 			for(int i = 0; i < 5; i++)
-				if(board[row][col].toString() == playerTwo[i].toString()){
+				if(board[row][col].getCardSpace() == playerTwo[i].toString()){
 					board[row][col] = new Space("Player Two");
 					playerTwo[i] = null;
 					replaceCard(playerTwo);
-					counter++;
+					Turn();
+					valid = true;
 				}
+		
 	}
 	
 }

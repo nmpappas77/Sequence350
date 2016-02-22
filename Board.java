@@ -18,6 +18,9 @@ public class Board extends JPanel
     private JButton[] player2Hand = new JButton[5];
     private Dimension dim = new Dimension(10,10);
     
+    private int counter;
+    
+    
     
     private Space[][] iBoard;
     
@@ -105,7 +108,7 @@ public class Board extends JPanel
     		String temp = new String();
     		temp = iPlayerTwo[i].toString();
     		
-    		player2Hand[i].setText(temp);
+    		player1Hand[i].setText(temp);
     	}
     }
     
@@ -133,21 +136,48 @@ public class Board extends JPanel
 	}
    }
     
- private class ButtonListener implements ActionListener{
-		
-		public void actionPerformed(ActionEvent e){
-		    
-			for (int row = 0; row < 8; row++)
-				for (int col = 0; col < 8; col++){
-					if(gameBoard[row][col] == e.getSource()){
-						
-					}
-						
-				}
-		    
-		          }
-		      
-		 }
+    private class ButtonListener implements ActionListener{
+        public void actionPerformed(ActionEvent e){
+        	
+        	counter = game.getCounter();
+             
+             for(int row = 0; row < 8; row++){
+                 for(int col = 0; col < 8; col ++){
+                     if(gameBoard[row][col] == e.getSource()){
+                         if((counter % 2) == 0){
+                                    game.select(row,col);
+                                    
+                                    iBoard = game.getBoard();
+                                    gameBoard[row][col].setText(iBoard[row][col].getCardSpace());
+                                    if(game.getValid() == true){
+                                    	gameBoard[row][col].setBackground(Color.GREEN);
+                                    	displayHand2();
+                                    }
+                                    game.setValid(false);
+                                   }                 
+                         else{
+                                      game.select(row,col);
+                                      
+                                      iBoard = game.getBoard();
+                                      gameBoard[row][col].setText(iBoard[row][col].getCardSpace());
+                                      if(game.getValid() == true){
+                                      	displayHand1();
+                                      	gameBoard[row][col].setBackground(Color.ORANGE);
+                                      }
+                                      game.setValid(false);
+                               }
+                           
+                           }
+                         
+                       }
+                       
+                   }
+        }
+               
+           
+             
+     }
+
 }
 
 
