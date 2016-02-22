@@ -8,13 +8,17 @@ public class SequenceGame {
 	private Space[][] board;
 	
 	/** int to keep track of player turn */
-	 private int turn;
+	 private int counter;
 	 
 	 /** Array of card names that resembles the deck */
 	 private String[] deck;
 	 
 	 /** array to keep track how many of each card need to be inserted or are left */
 	 private int[] deckCount;
+	 
+	 /**array to keep track of how many of each card need to be inserted for board initially
+	  * Not used after game start, it is only to initialize the deck */
+	 private int[] secDeckCount;
 	 
 	 /**Player one's hand */
 	 private String[] playerOne;
@@ -30,6 +34,7 @@ public class SequenceGame {
 		createDeck(deck);
 		
 		deckCount = new int[16];
+		secDeckCount = new int[16];
 		
 		//create internal board
 		board = new Space[8][8];
@@ -39,21 +44,30 @@ public class SequenceGame {
 		playerOne = new String[5];
 		playerTwo = new String[5];
 		
+		//gives the players their hands
 		giveHand(playerOne);
-		giveHand(playerTwo);//gives the players their hands
+		giveHand(playerTwo);
 		
 		//Print out card to test system functionality with player hand and board
 		//System.out.println(playerTwo[3].toString());
 		//System.out.println(board[4][5].getCardSpace());
 		
-		turn = 1;
-		
-		
+		counter = 0;
 	}
 	
-	public Space[][] getboard(){
+	public String[] getPlayerOne(){
+		return playerOne;
+	}
+	
+	public String[] getPlayerTwo(){
+		return playerTwo;
+	}
+	
+	public Space[][] getBoard(){
 		return board;
 	}
+	
+	
 	
 	/** Creates the array of cards in the deck */
 	public String[] createDeck(String[] cards){
@@ -85,12 +99,14 @@ public class SequenceGame {
 	
 	/** makes every card have a count of 4 in the array */
 	public int[] fillDeck(int[] counts){
-		deckCount = counts;
+		int[] counter;
+		
+		counter = counts;
 		
 		for (int i = 0; i < counts.length; i++)
-			deckCount[i] = 4;
+			counter[i] = 4;
 		
-		return deckCount;
+		return counter;
 	}
 	
 	public String[] giveHand(String[] playerHand){
@@ -98,19 +114,27 @@ public class SequenceGame {
 		hand = playerHand;
 		
 		int x;
+		int y;
+		
 		String tempCard;
 		
 		Random ran = new Random();
+		Random rand = new Random();
 		
 		for (int i = 0; i < 5; i++){
 			x = ran.nextInt(16); //number 1-16
+			
 			tempCard = deck[x]; //card is that card from deck position
-			if(deckCount[x] == 0){
-				tempCard = deck[(x + 1) % 16]; //if no cards of that kind left move on
-				x = (x + 1) % 16; //replace x if necessary
+			
+			while(deckCount[x] == 0){
+				y = rand.nextInt(16);
+				 //if no cards of that kind left move on
+				x = (x + y) % 16; //replace x if necessary
 			}
+			tempCard = deck[x].toString();
+			
 			deckCount[x] = deckCount[x] - 1; //remove one of 4 cards
-			hand[i] = deck[x]; //first spot in hand is that card from deck
+			hand[i] = tempCard; //first spot in hand is that card from deck
 			
 			//random number generated, inputed through the deck cards, then 
 			//that card is placed in player's hand. The next step is to subtract
@@ -120,23 +144,110 @@ public class SequenceGame {
 	}
 	
 	public void createBoard(){
+		
+		fillDeck(secDeckCount);
+		fillDeck(deckCount);
+		
 		Random ran = new Random();
+		Random rand = new Random();
 		
 		String temp;
 		
 		int name;
 		int x;
+		int y;
 		
-		for(int row = 0; row < 8; row++)
+		for(int row = 0; row < 8; row++){
 			for(int col = 0; col < 8; col++){
-				x = ran.nextInt(15) + 1; //number 1-16
-				temp = deck[x]; //card is that card from deck position
-				if(deckCount[x] == 0){
-					temp = deck[(x+1) % 16];//if no cards of that kind move on
-					x = (x+1) % 16; //replace x if necessary
+				x = ran.nextInt(16); //number 1-16
+								
+				while(secDeckCount[x] == 0){
+					y = rand.nextInt(16);
+					x = (x + y) % 16;
 				}
-				deckCount[x] = deckCount[x] - 1; //remove one of 4 cards
-				board[row][col] = new Space(deck[x].toString());//associates board position with card
+				
+				temp = deck[x].toString();//possible new deck position
+				
+				secDeckCount[x] = secDeckCount[x] - 1;//remove one of 4 cards
+				board[row][col] = new Space(temp);//associates board position with card
 			}
+		}
 	}
+	
+	public void replaceCard(String[] playerHand){
+		
+		String [] hand;
+		
+		hand = playerHand;
+		
+		for(int i = 0; i < 5; i++){
+			if(hand[i] == null)
+				hand[i] = takeCard(deck);
+			
+		}
+		
+	}
+	
+	public String takeCard(String[] pile){
+		Random ran = new Random();
+		Random rand = new Random();
+		
+		int y;
+		int x;
+		
+		String tempCard;
+				
+		x = ran.nextInt(16); //number 1-16
+			
+			while(deckCount[x] == 0){
+				y = rand.nextInt(16);
+				 //if no cards of that kind left move on
+				x = (x + y) % 16; //replace x if necessary
+			}
+			tempCard = deck[x].toString();
+			
+			deckCount[x] = deckCount[x] - 1; //remove one of 4 cards
+			
+			return tempCard;
+									
+	}
+	
+	public int getCounter(){
+		return counter;
+	}
+	
+	public void Turn(){
+		int x = 0;
+		
+		while (x == 0){
+			if (counter % 2 == 0){
+				System.out.println("Player 1 Move");
+			}if (counter % 2 == 1){
+				System.out.println("Player 2 Move");
+			}
+			counter++;
+		}
+	}
+	
+	public void select(int row, int col){
+		if(counter % 2 == 0)
+			for(int i = 0; i < 5; i++)
+				if(board[row][col].toString() == playerOne[i].toString()){
+					board[row][col] = new Space("Player One");
+					playerOne[i] = null;
+					replaceCard(playerOne);
+					counter++;
+					
+				}
+		
+		if(counter % 2 == 1)
+			for(int i = 0; i < 5; i++)
+				if(board[row][col].toString() == playerTwo[i].toString()){
+					board[row][col] = new Space("Player Two");
+					playerTwo[i] = null;
+					replaceCard(playerTwo);
+					counter++;
+				}
+	}
+	
 }

@@ -45,12 +45,15 @@ public class Board extends JPanel
         
 		add(center, BorderLayout.CENTER);
 		add(bottom, BorderLayout.SOUTH);
-		//add(right, BorderLayout.EAST);
+
+		bottom.setPreferredSize(new Dimension(200,100));
+		
+		center.setPreferredSize(new Dimension(400,600));
         
       //create board grid
-      		center.setLayout(new GridLayout(8,8,0,0));
+      		center.setLayout(new GridLayout(8,8,7,8));
       		//right.setLayout(new GridLayout(5,1,0,0));
-      		bottom.setLayout(new GridLayout(5,1,0,0));
+      		bottom.setLayout(new GridLayout(5,2,1,5));
       		
       		constructBoard(center, listener);
       		
@@ -59,10 +62,10 @@ public class Board extends JPanel
       //create hands
       		
       		
-      		//constructHand(right, player1Hand);
-      		constructHand(bottom, player2Hand);
+      		constructHand(bottom, player1Hand);
+      		//constructHand(bottom, player2Hand);
       		
-      		
+      		displayHand1();
     }
     
     public void constructBoard(JPanel panel, ButtonListener listener){
@@ -84,27 +87,44 @@ public class Board extends JPanel
         }   
    }
     
+    public void displayHand1(){
+    	iPlayerOne = game.getPlayerOne();
+    	
+    	for(int i = 0; i < 5; i++){
+    		String temp = new String();
+    		temp = iPlayerOne[i].toString();
+    		
+    		player1Hand[i].setText(temp);
+    	}
+    }
+    
+    public void displayHand2(){
+    	iPlayerTwo = game.getPlayerTwo();
+    	
+    	for(int i = 0; i < 5; i++){
+    		String temp = new String();
+    		temp = iPlayerTwo[i].toString();
+    		
+    		player2Hand[i].setText(temp);
+    	}
+    }
+    
     public void constructHand(JPanel panel, JButton[] hand){
     	for(int i = 0; i < 5; i++){
     		JButton[] phand;
     		
     		phand = hand;
     		
-    		Border thickBorder = new LineBorder(Color.black, 2);
-    		
-    		phand[i] = new JButton("");
-    		phand[i].setPreferredSize(dim);
-    		phand[i].setBorder(thickBorder);
-    		
+    		phand[i] = new JButton("AAAAAAA");
+    		phand[i].setPreferredSize(new Dimension(dim));
+    		    		
     		panel.add(phand[i]);
     	}
     }
     
     private void showBoard(){
 		iBoard = game.getBoard();
-		
-		
-		
+				
 		//set button text on panel
 		for (int row = 0; row < 8; row++)
 			for (int col = 0; col < 8; col++){
@@ -113,13 +133,23 @@ public class Board extends JPanel
 	}
    }
     
-    private class ButtonListener implements ActionListener{
+ private class ButtonListener implements ActionListener{
 		
 		public void actionPerformed(ActionEvent e){
-			
-		}
-    }
-    }
+		    
+			for (int row = 0; row < 8; row++)
+				for (int col = 0; col < 8; col++){
+					if(gameBoard[row][col] == e.getSource()){
+						
+					}
+						
+				}
+		    
+		          }
+		      
+		 }
+}
+
 
 
 
