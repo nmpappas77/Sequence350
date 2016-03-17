@@ -13,7 +13,7 @@
 			for(int col = 1; col < 8; col++){
 				if (board [row][col] == board[row][col-1])
 					counter++;
-
+			}
 		if (counter >= 4){
 			return true;
 		}
@@ -73,6 +73,6 @@
         }
 		
 		
-		}
+		
 		return false;
 	}
