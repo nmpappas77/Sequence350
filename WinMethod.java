@@ -10,7 +10,7 @@
 		
 		for(int i = 0; i < 8; i++){
 			for(int j = 0; j < 8; j++){
-			if(board[i][j].getCardSpace() == playerOne[i].toString()){
+			if(board[i][j].getCardSpace() == playerTwo[i].toString()){
 				if (board[i][j].getCardSpace() == board[i-1][j].getCardSpace()){
 					counter++;
 				}
@@ -64,6 +64,70 @@
 		for(int i = 0; i < 8; i++){
 			for(int j = 0; j < 8; j++){
 			if(board[i][j].getCardSpace() == playerTwo[i].toString()){
+				if (board[i][j].getCardSpace() == board[i-1][j+1].getCardSpace())
+				counter++;
+			}
+			if (counter >= 4)
+				return true;
+		}
+	}
+		
+		for(int i = 0; i < 8; i++){
+			for(int j = 0; j < 8; j++){
+			if(board[i][j].getCardSpace() == playerOne[i].toString()){
+				if (board[i][j].getCardSpace() == board[i-1][j].getCardSpace()){
+					counter++;
+				}
+			}
+			if (counter >= 4)
+				return true;
+		}
+	}
+		for(int i = 0; i < 8; i++){
+			for(int j = 0; j < 8; j++){
+			if(board[i][j].getCardSpace() == playerOne[i].toString()){
+				if (board[i][j].getCardSpace() == board[i][j-1].getCardSpace())
+				counter++;
+			}
+			if (counter >= 4)
+				return true;
+		}
+	}
+		
+		for(int i = 0; i < 8; i++){
+			for(int j = 0; j < 8; j++){
+			if(board[i][j].getCardSpace() == playerOne[i].toString()){
+				if (board[i][j].getCardSpace() == board[i-1][j-1].getCardSpace())
+				counter++;
+			}
+			if (counter >= 4)
+				return true;
+		}
+	}
+		for(int i = 0; i < 8; i++){
+			for(int j = 0; j < 8; j++){
+			if(board[i][j].getCardSpace() == playerOne[i].toString()){
+				if (board[i][j].getCardSpace() == board[i+1][j+1].getCardSpace())
+				counter++;
+			}
+			if (counter >= 4)
+				return true;
+		}
+	}
+		for(int i = 0; i < 8; i++){
+			for(int j = 0; j < 8; j++){
+			if(board[i][j].getCardSpace() == playerOne[i].toString()){
+				if (board[i][j].getCardSpace() == board[i+1][j-1].getCardSpace())
+				counter++;
+			}
+			if (counter >= 4)
+				return true;
+		}
+	}
+		
+		for(int i = 0; i < 8; i++){
+			for(int j = 0; j < 8; j++){
+			if(board[i][j].getCardSpace() == playerOne[i].toString()){
 				if (board[i][j].getCardSpace() == board[i-1][j+1].getCardSpace())
 				counter++;
 			}
