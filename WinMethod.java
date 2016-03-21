@@ -37,7 +37,7 @@
 		for (int col1 = 0; col1 < 8; ++col1) {
             for (int row1 = 1; row1 < 8; ++row1) {
                 if (col1 + row1 >= 8) break;
-                if (board[row1-1][col1 + row1 - 1] == board[row1][col1+row1])
+                if (board[row1][col1] == board[row1-1][col1 + row1 - 1] && board[row1][col1] == board[row1][col1+row1])
                     ++count;
        
                 if (count >= 4) 
@@ -50,7 +50,7 @@
 		for (int row1 = 0; row1 < 8; ++row1) {
             for (int col1 = 1; col1 < 8; ++col1) {
                 if (col1 + row1 >= 7) break;
-                if (board[row1+col1 - 1][col1 - 1] == board[row1 + col1][col1])
+                if (board[row1][col1] == board[row1+col1 - 1][col1 - 1] && board[row1][col1] == board[row1 + col1][col1])
                     ++count1;
              
                 if (count1 >= 4) 
@@ -63,12 +63,16 @@
 		for (int col1 = 0; col1 < 8; ++col1) {
             for (int row1 = 1; row1 < 8; ++row1) {
                 if (col1 - row1 < 0) break;
-                if (board[row1 - 1][col1 - row1 + 1] == board[row1][col1-row1])
-                    ++counter2;
+                if (board[row1][col1] == board[row1 - 1][col1 - row1 + 1] && board[row1][col1] == board[row1][col1-row1])
+                    counter2++;
         
-                if (counter2 >= 4) 
+                if (counter2 == 4) 
                 	return true;
                 
             }	
         }
 		
+		
+		
+		return false;
+	}	
